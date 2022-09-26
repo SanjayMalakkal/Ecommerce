@@ -13,11 +13,11 @@ class Customer(models.Model):
 
 
 class Seller(models.Model):
-    sell_name = models.CharField(max_length=40)
-    sell_email = models.CharField(max_length=50)
-    sell_phone = models.BigIntegerField()
-    sell_image = models.ImageField(upload_to='seller/')
-    sell_password = models.CharField(max_length=20)
+    seller_name = models.CharField(max_length=40)
+    seller_email = models.CharField(max_length=50)
+    seller_phone = models.BigIntegerField()
+    seller_image = models.ImageField(upload_to='seller/')
+    seller_password = models.CharField(max_length=20)
 
 
 class Admin(models.Model):

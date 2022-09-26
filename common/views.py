@@ -22,13 +22,13 @@ def seller_login(request):
 def customer_signup(request):
     msg=''
     if request.method == 'POST':
-        c_name = request.POST['customer_name']
-        c_eml = request.POST['customer_email']
-        c_phone = request.POST['customer_number']
-        c_img = request.FILES['customer_img']
-        c_passw = request.FILES['customer_password']
+        c_name = request.POST['cust_name']
+        c_eml = request.POST['cust_email']
+        c_phone = request.POST['cust_phone']
+        c_img = request.FILES['cust_file']
+        c_passw = request.POST['cust_password']
        
-        customer_exists=Customer.objects.filter(customer_email=c_eml).exists()
+        customer_exists=Customer.objects.filter(cust_email=c_eml).exists()
         if not customer_exists:
 
              obj = Customer(cust_name=c_name,cust_email=c_eml,cust_phone=c_phone,cust_image=c_img,cust_password=c_passw)
