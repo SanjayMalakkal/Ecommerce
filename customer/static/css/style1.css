@@ -3,7 +3,7 @@
     top: 60px;
     width: 260px;
     height: calc(100% - 60px);
-    background: rgb(36, 238, 36);
+    background: rgb(203, 252, 6);
 }
 .sidebar ul {
     margin-top: 20px;
@@ -18,7 +18,7 @@
 .sidebar ul li a {
     width: 100%;
     text-decoration: none;
-    color: aliceblue;
+    color: blue;
     height: 60px;
     display: flex;
     align-items: center;
