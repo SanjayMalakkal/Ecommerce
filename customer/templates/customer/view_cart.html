@@ -1,0 +1,62 @@
+{% extends 'customer/customer_home.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+<h1 class="display-4">My Cart</h1>
+
+<table class="table table-primary" align="center" style="width: 1000px;" >
+    <thead>
+      <tr>
+        <th scope="col">slno</th>
+        <th scope="col">Image</th>
+        <th scope="col">Product name</th>
+        <th scope="col">Price</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>img</td>
+        <td>fan</td>
+        <td>1200</td>
+        <td>
+            <div class="card-body">
+                <a href="{% url 'customer:productdetails' %}" class="btn btn-primary">Buy Now</a>
+                <a href="#" class="btn btn-danger"> Cancel</a>
+              </div>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>img</td>
+        <td>pen</td>
+        <td>10</td>
+        <td><div class="card-body">
+            <a href="{% url 'customer:productdetails' %}" class="btn btn-primary">Buy Now</a>
+            <a href="#" class="btn btn-danger"> Cancel</a>
+          </div></td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>img</td>
+        <td>tv</td>
+        <td>15000</td>
+        <td><div class="card-body">
+            <a href="{% url 'customer:productdetails' %}" class="btn btn-primary">Buy Now</a>
+            <a href="#" class="btn btn-danger"> Cancel</a>
+          </div></td>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}
+    
+</body>
+</html>

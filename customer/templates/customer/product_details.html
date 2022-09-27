@@ -1,3 +1,5 @@
+{% extends 'customer/customer_home.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +9,47 @@
     <title>Document</title>
 </head>
 <body>
-    
+
+<div class="card position-absolute top-50 start-50 translate-middle" style="width: 50%rem;background-color: antiquewhite;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <div class="row mb-3">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Quantity</label>
+            <div class="col-sm-10">
+                <select class="form-select" id="autoSizingSelect" style="width: 100px;">
+                    <option selected>Choose...</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Shipping Address</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="row mb-3">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Total</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" value="Readonly input here..." aria-label="readonly input example" style="width: 150px;" readonly>
+            </div>
+        </div>
+        
+
+      </li>
+      <!-- <li class="list-group-item">A second item</li>
+      <li class="list-group-item">A third item</li> -->
+    </ul>
+    <div class="card-body">
+      <a href="#" class="btn btn-primary">Check out</a>
+      <a href="#" class="btn btn-danger"> Cancel</a>
+    </div>
+  </div>
+{% endblock %}
 </body>
 </html>
