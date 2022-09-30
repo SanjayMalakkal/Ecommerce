@@ -9,23 +9,32 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </head>
 <body>
-    <form action="">
+    <form action="" method="POST" enctype="multipart/form-data">
+     {% csrf_token %}
     
      <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">name</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="name">
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="name" name="seller_name">
         <label for="exampleFormControlInput1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="seller_email">
+        <label for="exampleFormControlInput1" class="form-label">Address</label>
+        <textarea name="" id="" cols="100" rows="10" name="seller_adds"></textarea>
+        <br>
         <label for="exampleFormControlInput1" class="form-label">phone no</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="phone number">
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="phone number" name="seller_phone">
+        <label for="exampleFormControlInput1" class="form-label">Account no</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Account no" name="seller_accno">
+        <label for="exampleFormControlInput1" class="form-label">IFSC code</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="IFSC code" name="seller_ifsc">
         <label for="exampleFormControlInput1" class="form-label">pic</label>
-        <input type="file" class="form-control" id="exampleFormControlInput1" placeholder="pic">
+        <input type="file" class="form-control" id="exampleFormControlInput1" placeholder="pic" name="seller_image">
         <label for="exampleFormControlInput1" class="form-label">password]</label>
-        <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="password">
+        <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="password" name="seller_password">
         <input type="submit">
+        {{message}}
 
 
-        
+
       </div>
     </form>
 </body>
