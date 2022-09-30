@@ -43,4 +43,25 @@ def customer_signup(request):
 
 
 def seller_signup(request):
-    return render(request,'common/seller_signup.html')
+     msg=''
+     if request.method == 'POST':
+        s_name = request.POST['seller_name']
+        s_eml = request.POST['seller_email']
+        s_phone = request.POST['seller_phone']
+        s_img = request.FILES['seller_image']
+        s_passw = request.POST['seller_password']
+        s_adds = request.POST['seller_adds']
+        s_accno = request.POST['seller_accno']
+        s_ifsc = request.POST['seller_ifsc']
+       
+        seller_exists=Seller.objects.filter(seller_email=s_eml).exists()
+        if not seller_exists:
+
+             obj = Seller(seller_name=s_name,seller_email=s_eml,seller_phone=s_phone,seller_image=s_img,seller_password=s_passw,seller_adds=s_adds,seller_accno=s_accno,seller_ifsc=s_ifsc)
+             obj.save()
+             msg='success'
+        
+        else:
+            msg='email already exist'
+
+     return render(request,'common/seller_signup.html',{'message':msg})
