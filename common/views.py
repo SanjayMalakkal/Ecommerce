@@ -1,5 +1,5 @@
 from urllib.request import Request
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .models import *
 # Create your views here.
@@ -16,7 +16,19 @@ def admin_login(request):
 
 
 def seller_login(request):
-    return render(request,'common/seller_login.html')
+    msg=''
+    if request.method == 'POST':
+        s_name = request.POST['seller_name']
+        s_pass = request.POST['seller_password']
+        data_exits=Seller.objects.filter(seller_email=s_name,seller_password=s_pass).exists()
+        if data_exits:
+            return redirect('seller:sellerhome')
+        else:
+            msg='incorrect username or password'
+
+    return render(request,'common/seller_login.html',{'message':msg})
+
+
 
 
 def customer_signup(request):
