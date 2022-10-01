@@ -22,6 +22,8 @@ def seller_login(request):
         s_pass = request.POST['seller_password']
         data_exits=Seller.objects.filter(seller_email=s_name,seller_password=s_pass).exists()
         if data_exits:
+            seller_data=Seller.objects.get(seller_email=s_name,seller_password=s_pass)
+            request.session['seller_id']=seller_data.id
             return redirect('seller:sellerhome')
         else:
             msg='incorrect username or password'
