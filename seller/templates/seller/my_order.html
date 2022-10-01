@@ -13,6 +13,8 @@
 </head>
 <body>
     {% block content %}
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
 
     <div align="center">
         <div class="addproduct">
@@ -27,24 +29,26 @@
             </div>
             <div class="box1">
                 <label for="product_description">PRODUCT DESCRIPTION</label>
-                <textarea name="" id="" cols="20" rows="5"></textarea>
+                <textarea name="product_description" id="" cols="20" rows="5"></textarea>
             </div>
             <div class="box1">
                 <label for="price">PRICE</label>
-                <input type="text" name="price" id="" placeholder="enter product price">
+                <input type="text" name="product_price" id="" placeholder="enter product price">
             </div>
             <div class="box1">
                 <label for="stock">STOCK</label>
-                <input type="text" name="stock" id="" placeholder="enter stock">
+                <input type="text" name="product_stock" id="" placeholder="enter stock">
             </div>
             <div class="box1">
                 <label for="product_image">IMAGE</label>
-                <input type="file" name="" id="" placeholder="product image">
+                <input type="file" name="product_image" id="" placeholder="product image">
             </div> 
         </div>
-        <button type="button" class="btn btn-info">ADD</button>
+        <button type="submit" class="btn btn-info">ADD</button>
+        {{msg}}
 
     </div>
+    </form>
 {% endblock %}
 </body>
 </html>
