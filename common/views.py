@@ -8,7 +8,19 @@ def homepage(request):
 
 
 def customer_login(request):
-    return render(request,'common/customer_login.html')
+    msg=''
+    if request.method == 'POST':
+        c_name = request.POST['customer_name']
+        c_pass = request.POST['customer_password']
+        data_exits=Customer.objects.filter(cust_email=c_name,cust_password=c_pass).exists()
+        if data_exits:
+            customer_data=Customer.objects.get(cust_email=c_name,cust_password=c_pass)
+            request.session['customer_id']=customer_data.id
+            return redirect('customer:home')
+        else:
+            msg='incorrect username or password'
+
+    return render(request,'common/customer_login.html',{'message':msg})
 
 
 def admin_login(request):

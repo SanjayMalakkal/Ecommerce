@@ -1,10 +1,13 @@
 from urllib.request import Request
 from django.shortcuts import render
 from django.http import HttpResponse
+
+from common.models import Customer
 from .models import *
 # Create your views here.
 def cust_home(request):
-    return render(request,'customer/customer_home.html')
+    customer_data = Customer.objects.get(id = request.session['customer_id'])
+    return render(request,'customer/customer_home.html',{'customer' : customer_data})
 
 
 def cust_update(request):
@@ -16,7 +19,24 @@ def order_history(request):
 
 
 def change_password(request):
-    return render(request,'customer/change_password.html')
+    msg = ""
+    if request.method == 'POST':
+        
+        cur_password = request.POST['current_password']
+        new_password = request.POST['new_password']
+        conf_password = request.POST['confirm_password']
+        customer_data =  Customer.objects.get(id = request.session['customer_id'])
+        if cur_password == customer_data.cust_password:
+            if new_password == conf_password:
+                customer_data.cust_password = new_password
+                customer_data.save()
+                msg = "Password changed succesfully"
+            else:
+                msg = "Password does not match"
+        else:
+            msg = "Incorrect Passsword"
+
+    return render(request,'customer/change_password.html',{'msg':msg})
 
 
 
