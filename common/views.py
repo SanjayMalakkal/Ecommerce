@@ -1,10 +1,13 @@
+from itertools import product
 from urllib.request import Request
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .models import *
+from seller.models import Product
 # Create your views here.
 def homepage(request):
-    return render(request,'common/project_home.html')
+    products = Product.objects.all()
+    return render(request,'common/project_home.html',{'products' : products})
 
 
 def customer_login(request):
