@@ -9,6 +9,7 @@ urlpatterns = [
    path("changepassword",views.change_password,name='changepassword'),
    path("productdetails",views.product_det,name='productdetails'),
    path("viewcart",views.view_cart,name='viewcart'),
-   path("logout",views.logout,name='logout')
+   path("logout",views.logout,name='logout'),
+   path('cart/<int:pid>',views.add_to_cart)
 
 ]

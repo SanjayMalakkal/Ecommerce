@@ -51,3 +51,7 @@ def logout(request):
     request.session.flush()
     return redirect('common:home')
 
+
+def add_to_cart(request,pid):
+    
+    pass

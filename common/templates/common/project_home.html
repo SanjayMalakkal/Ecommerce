@@ -48,7 +48,9 @@
                 
               </li>
               <li class="nav-item">
+                {% if not 'customer_id' in request.session %}
                 <a class="nav-link active" href="{% url 'common:sellerlogin' %}">Become a seller</a>
+                {% endif %}
               </li>
             </ul>
             <form class="d-flex" role="search">
