@@ -24,7 +24,19 @@ def customer_login(request):
 
 
 def admin_login(request):
-    return render(request,'common/admin_login.html')
+    msg=''
+    if request.method == 'POST':
+        a_name = request.POST['admin_id']
+        a_pass = request.POST['admin_password']
+        data_exits=Admin.objects.filter(admin_id=a_name,admin_password=a_pass).exists()
+        if data_exits:
+            admin_data=Admin.objects.get(admin_id=a_name,admin_password=a_pass)
+            request.session['admin_id']=admin_data.id
+            return redirect('ecomm_admin:home')
+        else:
+            msg='incorrect username or password'
+
+    return render(request,'common/admin_login.html',{'message':msg})
 
 
 def seller_login(request):
