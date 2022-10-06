@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 
 from common.models import Customer
+from seller.models import Product
 from .models import *
 # Create your views here.
 def cust_home(request):
@@ -54,4 +55,9 @@ def logout(request):
 
 def add_to_cart(request,pid):
     
-    pass
+    product = Product.objects.get(id=pid)
+    customer = Customer.objects.get(id = request.session['customer_id'])
+
+    cart = Cart(customer=customer,product=product)
+    cart.save()
+    return redirect('common:home')
