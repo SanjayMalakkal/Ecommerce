@@ -25,7 +25,11 @@
                 <a class="nav-link active" aria-current="page" href="{% url 'common:home' %}">Home</a>
               </li>
               <li class="nav-item">
+                {% if not 'customer_id' in request.session %}
                 <a class="nav-link active" href="{% url 'common:customerlogin' %}">Login</a>
+                {% else %}
+                <a class="nav-link active" href="{% url 'customer:logout' %}">Logout</a>
+                {% endif %}
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -41,13 +45,16 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled">Logout</a>
+                
               </li>
               <li class="nav-item">
                 <a class="nav-link active" href="{% url 'common:sellerlogin' %}">Become a seller</a>
               </li>
             </ul>
             <form class="d-flex" role="search">
+              {% if 'customer_id' in request.session %}
+              <h3>{{request.session.customer_name}}</h3>
+              {% endif %}
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-success" type="submit">Search</button>
             </form>
@@ -65,8 +72,8 @@
                 <img src={{product.p_image.url}} class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">{{product.p_name}}</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <h6>{{product.seller.seller_name}}</h6>
+                  <p class="card-text">{{product.p_description}}</p>
+                  <h6>sold by:{{product.seller.seller_name}}</h6>
                 </div>
 
                 <ul class="list-group list-group-flush">
@@ -74,7 +81,7 @@
                     <div class="row mb-3">
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Price</label>
                         <div class="col-sm-10">
-                            <input class="form-control" type="text" value="2000" aria-label="readonly input example" style="width: 150px;" readonly>
+                            <input class="form-control" type="text" value={{product.p_price}} aria-label="readonly input example" style="width: 150px;" readonly>
                         </div>
                     </div>
                   </li>
@@ -87,8 +94,9 @@
                 </div>
             </div>
         </div>
-        </div>
         {% endfor %}
+        </div>
+        
     </div>
 
     {% endblock %}

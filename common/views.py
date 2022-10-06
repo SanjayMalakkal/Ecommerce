@@ -4,9 +4,11 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .models import *
 from seller.models import Product
+
 # Create your views here.
 def homepage(request):
     products = Product.objects.all()
+    customers = Customer
     return render(request,'common/project_home.html',{'products' : products})
 
 
@@ -19,7 +21,8 @@ def customer_login(request):
         if data_exits:
             customer_data=Customer.objects.get(cust_email=c_name,cust_password=c_pass)
             request.session['customer_id']=customer_data.id
-            return redirect('customer:home')
+            request.session['customer_name']=customer_data.cust_name
+            return redirect('common:home')
         else:
             msg='incorrect username or password'
 

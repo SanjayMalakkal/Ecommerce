@@ -1,5 +1,5 @@
 from urllib.request import Request
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
 
 from common.models import Customer
@@ -28,8 +28,7 @@ def change_password(request):
         customer_data =  Customer.objects.get(id = request.session['customer_id'])
         if cur_password == customer_data.cust_password:
             if new_password == conf_password:
-                customer_data.cust_password = new_password
-                customer_data.save()
+                Customer.objects.filter(id = request.session['customer_id']).update(cust_password=new_password)
                 msg = "Password changed succesfully"
             else:
                 msg = "Password does not match"
@@ -46,4 +45,9 @@ def product_det(request):
 
 def view_cart(request):
     return render(request,'customer/view_cart.html')
+
+def logout(request):
+    del request.session['customer_id']
+    request.session.flush()
+    return redirect('common:home')
 
