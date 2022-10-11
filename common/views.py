@@ -7,9 +7,14 @@ from seller.models import Product
 
 # Create your views here.
 def homepage(request):
+
+    msg = ''
+    if 'cart_msg' in request.session:
+        msg = request.session['cart_msg']
+    print(msg)
     products = Product.objects.all()
     customers = Customer
-    return render(request,'common/project_home.html',{'products' : products})
+    return render(request,'common/project_home.html',{'products' : products,'cart_msg':msg})
 
 
 def customer_login(request):

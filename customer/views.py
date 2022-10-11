@@ -1,6 +1,6 @@
 from urllib.request import Request
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 
 from common.models import Customer
 from seller.models import Product
@@ -40,12 +40,19 @@ def change_password(request):
 
 
 
-def product_det(request):
-    return render(request,'customer/product_details.html')
+def product_det(request,pid):
+
+    if 'customer_id' in request.session:
+        product = Product.objects.get(id=pid)
+        
+    else:
+        return redirect('common:customerlogin')
+    return render(request,'customer/product_details.html',{'product' : product})
 
 
 def view_cart(request):
-    return render(request,'customer/view_cart.html')
+    cart_item = Cart.objects.filter(customer=request.session['customer_id'])
+    return render(request,'customer/view_cart.html',{'cart_item':cart_item})
 
 def logout(request):
     del request.session['customer_id']
@@ -54,10 +61,33 @@ def logout(request):
 
 
 def add_to_cart(request,pid):
-    
-    product = Product.objects.get(id=pid)
-    customer = Customer.objects.get(id = request.session['customer_id'])
 
-    cart = Cart(customer=customer,product=product)
-    cart.save()
-    return redirect('common:home')
+    msg = ''
+    if 'customer_id' in request.session:
+        product = Product.objects.get(id=pid)
+        customer = Customer.objects.get(id = request.session['customer_id'])
+        product_exist = Cart.objects.filter(product = pid).exists()
+        if not product_exist:
+            cart = Cart(customer=customer,product=product)
+            cart.save()
+            del request.session['cart_msg']
+            return redirect('common:home')
+        else:
+            request.session['cart_msg'] = 'already in cart'
+            return redirect('common:home')
+    else:
+        return redirect('common:customerlogin')  
+
+
+          
+
+def total_price(request):
+
+    qty = request.POST['qty']
+    price = request.POST['price']
+    total = int(qty) * float(price)
+    print(total)
+    return JsonResponse({'total':total})
+
+          
+    

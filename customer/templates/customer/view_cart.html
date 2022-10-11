@@ -22,11 +22,12 @@
       </tr>
     </thead>
     <tbody>
+      {% for items in cart_item %}
       <tr>
-        <th scope="row">1</th>
-        <td>img</td>
-        <td>fan</td>
-        <td>1200</td>
+        <th scope="row"></th>
+        <td><img src={{items.product.p_image.url}} alt="" height="100px" width="100px"></td>
+        <td>{{items.product.p_name}}</td>
+        <td>{{items.product.p_price}}</td>
         <td>
             <div class="card-body">
                 <a href="{% url 'customer:productdetails' %}" class="btn btn-primary">Buy Now</a>
@@ -34,26 +35,7 @@
               </div>
         </td>
       </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>img</td>
-        <td>pen</td>
-        <td>10</td>
-        <td><div class="card-body">
-            <a href="{% url 'customer:productdetails' %}" class="btn btn-primary">Buy Now</a>
-            <a href="#" class="btn btn-danger"> Cancel</a>
-          </div></td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>img</td>
-        <td>tv</td>
-        <td>15000</td>
-        <td><div class="card-body">
-            <a href="{% url 'customer:productdetails' %}" class="btn btn-primary">Buy Now</a>
-            <a href="#" class="btn btn-danger"> Cancel</a>
-          </div></td>
-      </tr>
+      {% endfor %}
     </tbody>
   </table>
 {% endblock %}
