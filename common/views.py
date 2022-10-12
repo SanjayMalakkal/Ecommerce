@@ -1,7 +1,7 @@
 from itertools import product
 from urllib.request import Request
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from .models import *
 from seller.models import Product
 
@@ -114,3 +114,20 @@ def seller_signup(request):
             msg='email already exist'
 
      return render(request,'common/seller_signup.html',{'message':msg})
+
+
+
+def check_email(request):
+    
+    email = request.POST['email']
+    email_exists = Seller.objects.filter(seller_email = email).exists()
+    
+    return JsonResponse({'email_exists':email_exists})
+
+
+def cust_check_email(request):
+    
+    email = request.POST['email']
+    email_exists = Customer.objects.filter(cust_email = email).exists()
+    
+    return JsonResponse({'email_exists':email_exists})
