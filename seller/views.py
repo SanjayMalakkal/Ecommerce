@@ -63,3 +63,8 @@ def add_product(request):
     return render(request,'seller/my_order.html')
 
 
+def logout(request):
+    del request.session['seller_id']
+    request.session.flush()
+    return redirect('common:home')
+

@@ -1,7 +1,7 @@
 from urllib.request import Request
 from django.shortcuts import redirect, render
 from django.http import HttpResponse,JsonResponse
-
+from .decorator import auth_customer
 from common.models import Customer
 from seller.models import Product
 from .models import *
@@ -14,11 +14,11 @@ def cust_home(request):
 def cust_update(request):
     return render(request,'customer/update_profile.html')
 
-
+@auth_customer
 def order_history(request):
     return render(request,'customer/order_history.html')
 
-
+@auth_customer
 def change_password(request):
     msg = ""
     if request.method == 'POST':
@@ -39,7 +39,7 @@ def change_password(request):
     return render(request,'customer/change_password.html',{'msg':msg})
 
 
-
+@auth_customer
 def product_det(request,pid):
 
     if 'customer_id' in request.session:
@@ -49,7 +49,7 @@ def product_det(request,pid):
         return redirect('common:customerlogin')
     return render(request,'customer/product_details.html',{'product' : product})
 
-
+@auth_customer
 def view_cart(request):
     cart_item = Cart.objects.filter(customer=request.session['customer_id'])
     return render(request,'customer/view_cart.html',{'cart_item':cart_item})
@@ -59,7 +59,7 @@ def logout(request):
     request.session.flush()
     return redirect('common:home')
 
-
+@auth_customer
 def add_to_cart(request,pid):
 
     msg = ''

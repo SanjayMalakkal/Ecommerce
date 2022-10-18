@@ -23,6 +23,7 @@ class Seller(models.Model):
     seller_ifsc = models.CharField(max_length=30,default='')
     seller_image = models.ImageField(upload_to='seller/')
     seller_password = models.CharField(max_length=20)
+    seller_status = models.CharField(max_length=40,default='pending')
 
 
 class Admin(models.Model):

@@ -58,8 +58,12 @@ def seller_login(request):
         data_exits=Seller.objects.filter(seller_email=s_name,seller_password=s_pass).exists()
         if data_exits:
             seller_data=Seller.objects.get(seller_email=s_name,seller_password=s_pass)
-            request.session['seller_id']=seller_data.id
-            return redirect('seller:sellerhome')
+            if seller_data.seller_status== 'approved':
+                request.session['seller_id']=seller_data.id
+                return redirect('seller:sellerhome')
+            else:
+                msg = 'not approved by admin'
+            
         else:
             msg='incorrect username or password'
 
@@ -108,7 +112,8 @@ def seller_signup(request):
 
              obj = Seller(seller_name=s_name,seller_email=s_eml,seller_phone=s_phone,seller_image=s_img,seller_password=s_passw,seller_adds=s_adds,seller_accno=s_accno,seller_ifsc=s_ifsc)
              obj.save()
-             msg='success'
+             return redirect('common:home')
+            #  msg='success'
         
         else:
             msg='email already exist'
