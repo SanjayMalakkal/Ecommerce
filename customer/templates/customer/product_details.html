@@ -35,7 +35,7 @@
         </div>
         <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Shipping Address</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea class="form-control" id="address" rows="3"></textarea>
         </div>
         <div class="row mb-3">
             <label for="inputEmail3" class="col-sm-2 col-form-label">Total</label>
@@ -50,12 +50,12 @@
       <li class="list-group-item">A third item</li> -->
     </ul>
     <div class="card-body">
-      <button type="button" class="btn btn-warning" onclick="pay()">checkout</button>
+      <button type="button" class="btn btn-success " onclick="pay()">checkout</button>
       <a href="#" class="btn btn-danger"> Cancel</a>
     </div>
   </div>
 </form>
-<!-- <script>
+<script>
   $(document).ready(function(){
     
     $.ajaxSetup({
@@ -87,11 +87,11 @@
 
     })
   })
-</script> -->
+</script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
     function pay() {
-        amount = $("#total_amount").val()
+        amount = $("#total_input").val()
         console.log('amount is',amount);
         $.ajaxSetup({
             headers: {
@@ -102,13 +102,14 @@
             url: '',
             type: 'POST',
             data: {
-                total: amount * 100,
+                total: amount*100 ,
             },
             success: function(response) {
-                console.log("payment_id = " + response.id);
+                
+                console.log("payment_id = " + response.id)
                 var options = {
                     "key": "rzp_test_jznmHCFBf6ZMUd", // Enter the Key ID generated from the Dashboard
-                    "amount": amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                    "amount":(parseInt(amount)*100).toString(), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
                     "currency": "INR",
                     "name": "Cybersquare",
                     "description": "Place order",

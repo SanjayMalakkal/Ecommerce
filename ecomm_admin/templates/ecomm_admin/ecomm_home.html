@@ -12,41 +12,29 @@
     <title>customer home</title>
 </head>
 <body>
-  <nav class="navbar navbar-dark bg-primary" >
-    <!-- Navbar content -->
-      <div class="container-fluid">
-        <a class="navbar-brand">Shop Now</a>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-danger" type="submit">Search</button>
-        </form>
-      </div>
-  </nav>
-    <!-- <div class="container"> -->
-        <div class="sidebar">
-            <ul>
-                <li><a href="{% url 'ecomm_admin:home' %}">
-                    <div>Home</div>
-                </a></li>
-                <li><a href="{% url 'ecomm_admin:approveseller' %}">
-                    <div>Approve seller</div>
-                </a></li>
-                <li><a href="{% url 'ecomm_admin:viewseller' %}">
-                    <div>View seller</div>
-                </a></li>
-                <li><a href="{% url 'ecomm_admin:viewcustomer' %}">
-                    <div>View customer</div>
-                </a></li>
-                <li><a href="{% url 'common:home' %}">
-                    <div>logout</div>
-                </a></li>
-            </ul>
+  <div>
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link active" aria-current="page" href="{% url 'ecomm_admin:home' %}">home</a>
+          <a class="nav-link" href="{% url 'ecomm_admin:approveseller' %}">Approvals</a>
+          <a class="nav-link" href="{% url 'ecomm_admin:viewseller' %}">Seller</a>
+          <a class="nav-link" href="{% url 'ecomm_admin:viewcustomer' %}">Customers</a>
+          <a class="nav-link" href="{% url 'common:adminlogin' %}">Logout</a>
         </div>
-        {% block content %}
-        
-        
-
-        {% endblock %}
+      </div>
+    </div>
+    <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-danger" type="submit">Search</button>
+    </form>
+    </nav>
+  </div>
 
         
         <!-- <div align="center">

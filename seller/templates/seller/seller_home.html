@@ -13,45 +13,33 @@
     <title>customer home</title>
 </head>
 <body>
-  <nav class="navbar navbar-dark bg-primary" >
-    <!-- Navbar content -->
-      <div class="container-fluid">
-        <a class="navbar-brand">Navbar</a>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-danger" type="submit">Search</button>
-        </form>
-      </div>
-  </nav>
-    <!-- <div class="container"> -->
-        <div class="sidebar">
-            <h1>welcome</h1>
-            <img src="{{seller.seller_image.url}}" alt="" width="100px">
-            <label for="">{{seller.seller_name|title}}</label>
-            <ul>
-                <li><a href="{% url 'seller:sellerhome' %}">
-                    <div>Home</div>
-                </a></li>
-                <li><a href="{% url 'seller:addproduct' %}">
-                    <div>Add product</div>
-                </a></li>
-                <li><a href="{% url 'seller:productcatelog' %}">
-                    <div>cateloge</div>
-                </a></li>
-                <li><a href="{% url 'seller:changepassword' %}">
-                    <div>change password</div>
-                </a></li>
-                <li><a href="{% url 'seller:viewprofile' %}">
-                    <div>profile</div>
-                </a></li>
-                <li><a href="{% url 'seller:updatestock' %}">
-                    <div>update stock</div>
-                </a></li>
-                <li><a href="{% url 'common:home' %}">
-                    <div>logout</div>
-                </a></li>
-            </ul>
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active" aria-current="page" href="{% url 'seller:sellerhome' %}">Home</a>
+              <a class="nav-link" href="{% url 'seller:addproduct' %}">Add product</a>
+              <a class="nav-link" href="{% url 'seller:productcatelog' %}">cateloge</a>
+              <a class="nav-link" href="{% url 'seller:changepassword' %}">change password</a>
+              <a class="nav-link" href="{% url 'seller:viewprofile' %}">profile</a>
+              <a class="nav-link" href="{% url 'seller:updatestock' %}">update stock</a>
+              <a class="nav-link" href="{% url 'common:home' %}">logout</a>
+            </div>
+          </div>
         </div>
+        <h1>welcome</h1>
+        <img src="{{seller.seller_image.url}}" alt="" width="100px">
+            <label for="" style="color: white;">{{seller.seller_name|title}}</label>
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-danger" type="submit">Search</button>
+        </form>
+        </nav>
+    <!-- <div class="container"> -->
         {% block content %}
         <div align="center" >
             <h1>PERSONAL INFORMATION</h1>

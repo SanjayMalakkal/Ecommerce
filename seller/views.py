@@ -12,7 +12,8 @@ def seller_home(request):
 
 
 def product_catelog(request):
-    return render(request,'seller/product_catelog.html')
+    products = Product.objects.filter(seller=request.session['seller_id'])
+    return render(request,'seller/product_catelog.html',{'products': products})
 
 
 def update_stock(request):

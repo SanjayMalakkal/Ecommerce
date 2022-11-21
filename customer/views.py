@@ -10,7 +10,7 @@ def cust_home(request):
     customer_data = Customer.objects.get(id = request.session['customer_id'])
     return render(request,'customer/customer_home.html',{'customer' : customer_data})
 
-
+@auth_customer
 def cust_update(request):
     return render(request,'customer/update_profile.html')
 
@@ -62,15 +62,16 @@ def logout(request):
 @auth_customer
 def add_to_cart(request,pid):
 
-    msg = ''
+
     if 'customer_id' in request.session:
         product = Product.objects.get(id=pid)
         customer = Customer.objects.get(id = request.session['customer_id'])
-        product_exist = Cart.objects.filter(product = pid).exists()
+        product_exist = Cart.objects.filter(product = pid,customer=request.session['customer_id']).exists()
         if not product_exist:
             cart = Cart(customer=customer,product=product)
             cart.save()
-            del request.session['cart_msg']
+            if request.session['cart_msg']:
+                del request.session['cart_msg']
             return redirect('common:home')
         else:
             request.session['cart_msg'] = 'already in cart'
@@ -88,6 +89,34 @@ def total_price(request):
     total = int(qty) * float(price)
     print(total)
     return JsonResponse({'total':total})
+
+
+@auth_customer
+def remove_item(request,pid):
+
+    product = Product.objects.get(id=pid)
+    customer = Customer.objects.get(id = request.session['customer_id'])
+    items = Cart.objects.get(product = pid,customer=request.session['customer_id'])
+    items.delete()
+    return redirect('customer:viewcart')
+
+
+def order_product(request,pid):
+    customer = request.session['cust_id']
+    product = Product.objects.get(id=pid)
+    order_date = datetime.datetime.now().time()
+    delivery_status = 'order placed'
+    address = request.POST['address']
+    payment_id = request.razorpay_payment_id
+    order_id = request.razorpay_order_id
+    payment_type = 'online'
+    payment_amount = request.POST['total']
+
+
+    
+
+
+
 
           
     
